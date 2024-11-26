@@ -12,6 +12,20 @@ from app.models import User, Post
 def seed_db():
     faker = Faker("en_IE")
     num_users = 10
+
+    #adding a user whose password il know
+    set_user_data = dict(
+        username="test",
+        email="test@email.com",
+        password="password",
+        about_me="This is a predefined user added to the database."
+    )
+    set_user = User()
+    set_user.from_dict(set_user_data, new_user=True)
+    db.session.add(set_user)
+    db.session.commit()
+
+
     for _ in range(num_users):
         data = dict(
             username = faker.user_name(),
